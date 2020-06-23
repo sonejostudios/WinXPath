@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon=/usr/share/pixmaps/synfigstudio/action_doc_open_icon.png
+Icon[en_US]=mate-panel-launcher
+Name[en_US]=WinXPath
+Exec=sh /media/sda7/Programming/Python/WinXPath/WinXPath.sh
+Name=PathConverter
