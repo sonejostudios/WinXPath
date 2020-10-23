@@ -1,12 +1,12 @@
 import sys
-from PySide2.QtWidgets import QApplication, QMainWindow
-from PySide2.QtCore import QFile
+from PySide2.QtWidgets import QApplication, QMainWindow, QShortcut
+from PySide2.QtCore import Qt, QFile
+from PySide2.QtGui import QKeySequence
 
 # import mainwindow.py as module and it's main class
 from mainwindow import Ui_MainWindow
 
 import config
-
 
 
 from pathlib import Path, PureWindowsPath, PurePosixPath
@@ -15,6 +15,7 @@ import webbrowser
 import os
 import pathlib
 import subprocess
+import json
 
 import stat
 
@@ -53,6 +54,13 @@ class MainWindow(QMainWindow):
 
         self.ui.check_prefix_dict.clicked.connect(self.onwin2lin)
 
+        self.ui.add_fav_btn.clicked.connect(self.add_fav)
+
+        self.ui.fav_list_widget.itemDoubleClicked.connect(self.load_fav)
+
+        # delete cmd from cmdlist
+        QShortcut(QKeySequence(Qt.Key_Delete), self.ui.fav_list_widget, self.delete_fav)
+
 
 
         # popultate prefix list
@@ -88,7 +96,15 @@ class MainWindow(QMainWindow):
 
 
 
-        # start
+        # create favorite list
+        self.favlist = []
+
+
+        # read favorite file
+        self.read_fav_file()
+
+
+            # start
         self.win2lin()
 
 
@@ -96,6 +112,47 @@ class MainWindow(QMainWindow):
 
     def test(self):
         print("test!")
+
+
+
+
+
+    def load_fav(self):
+        winpath = self.ui.fav_list_widget.currentItem().text()
+        self.ui.path_field.setPlainText(winpath)
+
+
+    def add_fav(self):
+        # add with path to list
+        self.favlist.append(self.ui.path_field.toPlainText())
+        self.change_fav_file()
+
+
+    def delete_fav(self):
+        item = self.ui.fav_list_widget.currentItem().text()
+        self.favlist.remove(item)
+        self.change_fav_file()
+
+
+    def change_fav_file(self):
+        #write fav list
+        with open("favs.json", 'w') as f:
+            json.dump(self.favlist, f, indent=0)
+
+        # read fav file
+        self.read_fav_file()
+
+
+    def read_fav_file(self):
+
+        # read fav list
+        with open("favs.json", 'r') as f:
+            self.favlist = json.load(f)
+
+        # populate fav list widget
+        self.ui.fav_list_widget.clear()
+        self.ui.fav_list_widget.addItems(self.favlist)
+
 
 
 
