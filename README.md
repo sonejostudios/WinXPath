@@ -18,3 +18,5 @@ Start it with:
 - just past a window path into th window path field. The unix path will be generated automatically according to the prefix dictionary set up in config.py
 
 - Alternatively, you can use (or enter) custome prefixes.
+
+- Save your favorite paths
