@@ -4,6 +4,9 @@
 prefix_dict = {"C:":"",
                "D:":"/media/sda6",
                "O:":"smb://isgnashacluster.local/organisation",
+               "P:":"smb://isgnashacluster.local/projekte",
+               "T:":"smb://isgnashacluster.local/temp",
+               "X:":"smb://isgnashacluster.local/externe",
                "H:":"smb://isgnashacluster.local/home"}
 
 
@@ -11,6 +14,9 @@ prefix_dict = {"C:":"",
 # custom prefix list (is needed for paths without win drives)
 prefix_list = ["/media/sda6",
                "smb://isgnashacluster.local/organisation",
+               "smb://isgnashacluster.local/projekte",
+               "smb://isgnashacluster.local/temp",
+               "smb://isgnashacluster.local/externe",
                "smb://isgnashacluster.local/home"]
 
 
