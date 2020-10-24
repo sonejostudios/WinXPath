@@ -355,7 +355,7 @@
          </size>
         </property>
         <property name="statusTip">
-         <string>Load Favorite: double left click / Delete Favorite: del key</string>
+         <string>Load Favorite: double left click / Delete Favorite: delete key</string>
         </property>
        </widget>
       </item>

@@ -1,5 +1,5 @@
 import sys
-from PySide2.QtWidgets import QApplication, QMainWindow, QShortcut
+from PySide2.QtWidgets import QApplication, QMainWindow, QShortcut, QMessageBox
 from PySide2.QtCore import Qt, QFile
 from PySide2.QtGui import QKeySequence
 
@@ -130,8 +130,13 @@ class MainWindow(QMainWindow):
 
     def delete_fav(self):
         item = self.ui.fav_list_widget.currentItem().text()
-        self.favlist.remove(item)
-        self.change_fav_file()
+
+        delete = QMessageBox.question(self, "Delete Path?",
+                                     "Do you really want to delete this path from favorites?\n" + item)
+
+        if delete == QMessageBox.Yes:
+            self.favlist.remove(item)
+            self.change_fav_file()
 
 
     def change_fav_file(self):
@@ -201,7 +206,6 @@ class MainWindow(QMainWindow):
         winpath = self.ui.path_field.toPlainText()
         winpath = winpath[:2]
         self.ui.win_prefix_box.setCurrentText(winpath)
-
 
 
 
